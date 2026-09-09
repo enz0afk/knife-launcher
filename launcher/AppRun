@@ -1,0 +1,10 @@
+#!/bin/sh
+# Soldat Launcher AppImage entry. Game files live next to the .AppImage.
+set -e
+HERE="$(dirname "$(readlink -f "$0")")"
+export PYTHONPATH="$HERE/usr/share/soldatlauncher${PYTHONPATH:+:$PYTHONPATH}"
+if ! command -v python3 >/dev/null 2>&1; then
+  echo "Soldat Launcher needs python3." >&2
+  exit 1
+fi
+exec python3 "$HERE/usr/share/soldatlauncher/launch.py" "$@"

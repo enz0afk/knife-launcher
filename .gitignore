@@ -1,0 +1,7 @@
+__pycache__/
+*.py[cod]
+*.AppImage
+.DS_Store
+*.swp
+.idea/
+.vscode/

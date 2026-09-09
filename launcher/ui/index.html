@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Knife Launcher 1.1</title>
+  <link rel="stylesheet" href="/styles.css?v=22">
+</head>
+<body>
+  <div class="app">
+    <nav class="sidebar">
+      <div class="brand-mark" title="Knife Launcher">
+        <img src="/assets/guns/knife.png" alt="">
+        <span>Knife Launcher</span>
+      </div>
+      <div class="nav-sep"></div>
+      <button class="nav-btn active" data-view="play" title="Play" aria-label="Play">
+        <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+      </button>
+      <button class="nav-btn" data-view="demos" title="Demos" aria-label="Demos">
+        <svg viewBox="0 0 24 24"><path d="M18 4l2 4h-3l-2-4h-2l2 4h-3l-2-4H8l2 4H7L5 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V4h-4zM4 18V10h16v8H4z"/></svg>
+      </button>
+      <button class="nav-btn" data-view="shots" title="Shots" aria-label="Shots">
+        <svg viewBox="0 0 24 24"><path d="M9 3L7.17 5H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2h-3.17L15 3H9zm3 15a5 5 0 1 1 0-10 5 5 0 0 1 0 10zm0-2.2A2.8 2.8 0 1 0 12 8.2a2.8 2.8 0 0 0 0 5.6z"/></svg>
+      </button>
+      <button class="nav-btn" data-view="local" title="Local" aria-label="Local">
+        <svg viewBox="0 0 24 24"><path d="M4 6h16v4H4V6zm0 8h16v4H4v-4z"/></svg>
+      </button>
+      <button class="nav-btn" data-view="soldier" title="Soldier" aria-label="Soldier">
+        <svg viewBox="0 0 24 24"><path d="M12 12c2.7 0 5-2.3 5-5s-2.3-5-5-5-5 2.3-5 5 2.3 5 5 5zm0 2c-3.3 0-10 1.7-10 5v3h20v-3c0-3.3-6.7-5-10-5z"/></svg>
+      </button>
+      <div class="nav-grow"></div>
+      <div class="nick-chip" title="Soldier">
+        <div class="nick-swatches">
+          <i id="chip-shirt"></i>
+          <i id="chip-pants"></i>
+        </div>
+        <span id="chip-name">—</span>
+      </div>
+    </nav>
+
+    <div class="main">
+      <header class="topbar">
+        <h1 id="page-title">Play</h1>
+        <span class="meta" id="page-meta"></span>
+      </header>
+
+      <div class="content">
+        <section class="view active" id="view-play">
+          <div class="join-bar">
+            <div class="field grow">
+              <label for="direct-ip">IP / soldat://</label>
+              <input id="direct-ip" type="text" value="127.0.0.1" placeholder="Paste soldat://host:port/pass or type an IP">
+            </div>
+            <div class="field tiny">
+              <label for="direct-port">Port</label>
+              <input id="direct-port" type="text" value="23073">
+            </div>
+            <div class="field tiny">
+              <label for="direct-pass">Password</label>
+              <input id="direct-pass" type="text" placeholder="optional">
+            </div>
+            <button class="btn" id="direct-join">Join</button>
+            <button class="btn ghost icon" id="refresh" title="Refresh">
+              <svg viewBox="0 0 24 24"><path d="M17.65 6.35A7.95 7.95 0 0 0 12 4V1L7 6l5 5V7c2.76 0 5 2.24 5 5a5 5 0 0 1-8.9 3.1L6.7 16.5A8 8 0 1 0 17.65 6.35z"/></svg>
+            </button>
+          </div>
+          <div class="filters">
+            <button class="chip" data-filter="empty">Hide empty</button>
+            <button class="chip" data-filter="full">Hide full</button>
+            <button class="chip" data-filter="bots">Hide bots</button>
+            <button class="chip" data-filter="private">Hide private</button>
+          </div>
+          <div class="table-wrap">
+            <table class="servers">
+              <thead>
+                <tr>
+                  <th></th>
+                  <th></th>
+                  <th>Server</th>
+                  <th>Mode</th>
+                  <th>Players</th>
+                  <th>Map</th>
+                  <th>Address</th>
+                </tr>
+              </thead>
+              <tbody id="server-rows">
+                <tr><td class="empty" colspan="7">Loading servers…</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="view" id="view-demos">
+          <div class="toolbar">
+            <div class="field grow">
+              <label for="demo-search">Search</label>
+              <input id="demo-search" type="search" placeholder="Name or map">
+            </div>
+            <button class="btn ghost icon" id="demo-refresh" title="Refresh">
+              <svg viewBox="0 0 24 24"><path d="M17.65 6.35A7.95 7.95 0 0 0 12 4V1L7 6l5 5V7c2.76 0 5 2.24 5 5a5 5 0 0 1-8.9 3.1L6.7 16.5A8 8 0 1 0 17.65 6.35z"/></svg>
+            </button>
+          </div>
+          <div class="filters">
+            <button class="chip on" id="demo-hide-tiny">Hide tiny files</button>
+            <button class="chip on" id="demo-hide-lobby">Hide lobby.sdm</button>
+          </div>
+          <p class="hint">Double-click a demo to play it in Soldat.</p>
+          <div class="table-wrap">
+            <table class="servers demos">
+              <thead>
+                <tr>
+                  <th>Demo</th>
+                  <th>Map</th>
+                  <th>Recorded</th>
+                  <th>Size</th>
+                </tr>
+              </thead>
+              <tbody id="demo-rows">
+                <tr><td class="empty" colspan="4">Loading demos…</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="view" id="view-shots">
+          <p class="hint">Screenshots from screens/. Click a tile to enlarge.</p>
+          <div class="shots-grid" id="shots-grid">
+            <div class="empty">Loading screenshots…</div>
+          </div>
+        </section>
+
+        <section class="view" id="view-local">
+          <div class="card practice-card">
+            <h2>Practice</h2>
+            <div class="practice-row">
+              <div class="field grow">
+                <label for="practice-map">Map</label>
+                <select id="practice-map"></select>
+              </div>
+              <div class="field tiny">
+                <label class="team-alpha" for="practice-bots-alpha">Alpha bots</label>
+                <div class="stepper">
+                  <button type="button" data-step="bots-alpha" data-dir="-1">−</button>
+                  <input id="practice-bots-alpha" type="number" min="0" max="8" value="4">
+                  <button type="button" data-step="bots-alpha" data-dir="1">+</button>
+                </div>
+              </div>
+              <div class="field tiny">
+                <label class="team-bravo" for="practice-bots-bravo">Bravo bots</label>
+                <div class="stepper">
+                  <button type="button" data-step="bots-bravo" data-dir="-1">−</button>
+                  <input id="practice-bots-bravo" type="number" min="0" max="8" value="4">
+                  <button type="button" data-step="bots-bravo" data-dir="1">+</button>
+                </div>
+              </div>
+              <div class="field">
+                <label for="practice-diff">Difficulty</label>
+                <select id="practice-diff">
+                  <option value="200">Easy</option>
+                  <option value="100" selected>Normal</option>
+                  <option value="50">Hard</option>
+                  <option value="10">Impossible</option>
+                </select>
+              </div>
+              <button class="btn green" id="practice-start">Start practice</button>
+            </div>
+            <p class="hint">Maps come from soldat.smod, soldat/maps, and downloads/maps. Lobby is skipped.</p>
+          </div>
+          <div class="local-actions">
+            <button class="btn green" id="local-start">Start server</button>
+            <button class="btn red" id="local-stop">Stop server</button>
+            <button class="btn ghost" id="local-join">Join 127.0.0.1:23040</button>
+          </div>
+          <div class="local-grid">
+            <div class="card">
+              <h2>Maps</h2>
+              <div class="field map-search">
+                <input id="map-search" type="search" placeholder="Filter maps">
+              </div>
+              <div class="map-list" id="map-list"></div>
+            </div>
+            <div class="card">
+              <h2>Server log</h2>
+              <div class="log" id="server-log">Server is stopped.</div>
+            </div>
+          </div>
+        </section>
+
+        <section class="view" id="view-soldier">
+          <div class="soldier">
+            <div class="card">
+              <h2>Profile</h2>
+              <div class="setting">
+                <div class="setting-copy">
+                  <div class="label">Player name</div>
+                  <div class="setting-help">Shown in-game and in the lobby</div>
+                </div>
+                <input id="player-name" type="text" maxlength="24" placeholder="Your nickname">
+              </div>
+              <div class="setting">
+                <div class="setting-copy">
+                  <div class="label">Mouse sensitivity</div>
+                  <div class="setting-help">0.00 – 1.00</div>
+                </div>
+                <div class="stepper">
+                  <button type="button" data-step="sens" data-dir="-1">−</button>
+                  <input id="sens" type="number" min="0" max="1" step="0.05">
+                  <button type="button" data-step="sens" data-dir="1">+</button>
+                </div>
+              </div>
+              <div class="setting">
+                <div class="setting-copy">
+                  <div class="label">Sound volume</div>
+                  <div class="setting-help">0 – 100</div>
+                </div>
+                <div class="stepper">
+                  <button type="button" data-step="vol" data-dir="-1">−</button>
+                  <input id="vol" type="number" min="0" max="100" step="1">
+                  <button type="button" data-step="vol" data-dir="1">+</button>
+                </div>
+              </div>
+              <div class="setting">
+                <div class="setting-copy">
+                  <div class="label">Record demos</div>
+                  <div class="setting-help">Auto-save every map to demos/</div>
+                </div>
+                <label class="switch">
+                  <input type="checkbox" id="autorecord">
+                  <span class="switch-ui"></span>
+                </label>
+              </div>
+              <div class="save-hint" id="save-hint">All changes saved</div>
+            </div>
+
+            <div class="card">
+              <h2>Appearance</h2>
+              <div class="colors">
+                <label class="swatch">
+                  <span class="face-wrap"><span class="face" id="face-skin"></span></span>
+                  <input type="color" id="color-skin">
+                  <span class="swatch-name">Skin</span>
+                  <span class="swatch-hex" id="hex-skin"></span>
+                </label>
+                <label class="swatch">
+                  <span class="face-wrap"><span class="face" id="face-shirt"></span></span>
+                  <input type="color" id="color-shirt">
+                  <span class="swatch-name">Shirt</span>
+                  <span class="swatch-hex" id="hex-shirt"></span>
+                </label>
+                <label class="swatch">
+                  <span class="face-wrap"><span class="face" id="face-pants"></span></span>
+                  <input type="color" id="color-pants">
+                  <span class="swatch-name">Pants</span>
+                  <span class="swatch-hex" id="hex-pants"></span>
+                </label>
+                <label class="swatch">
+                  <span class="face-wrap"><span class="face" id="face-hair"></span></span>
+                  <input type="color" id="color-hair">
+                  <span class="swatch-name">Hair</span>
+                  <span class="swatch-hex" id="hex-hair"></span>
+                </label>
+                <label class="swatch">
+                  <span class="face-wrap"><span class="face" id="face-jet"></span></span>
+                  <input type="color" id="color-jet">
+                  <span class="swatch-name">Jet</span>
+                  <span class="swatch-hex" id="hex-jet"></span>
+                </label>
+              </div>
+            </div>
+
+            <div class="card">
+              <h2>Hair</h2>
+              <div class="toggles" id="hair-toggles"></div>
+            </div>
+
+            <div class="card">
+              <h2>Headgear</h2>
+              <div class="toggles" id="head-toggles"></div>
+            </div>
+
+            <div class="card">
+              <h2>Chain</h2>
+              <div class="toggles" id="chain-toggles"></div>
+            </div>
+
+            <div class="card">
+              <h2>Secondary weapon</h2>
+              <div class="loadout" id="sec-toggles"></div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+
+  <div class="overlay" id="join-overlay">
+    <div class="modal">
+      <header>
+        <h2 id="join-title">Server</h2>
+        <div class="sub" id="join-addr"></div>
+      </header>
+      <div class="body" id="join-body"></div>
+      <footer>
+        <button class="btn ghost" id="join-close">Close</button>
+        <button class="btn green" id="join-go">Join</button>
+      </footer>
+    </div>
+  </div>
+
+  <div class="banner" id="running-banner">
+    <span class="dot"></span>
+    <span>Soldat is running</span>
+    <button class="btn red" id="kill-client">Kill</button>
+  </div>
+
+  <div class="overlay" id="shot-overlay">
+    <div class="shot-lightbox">
+      <img id="shot-full" alt="">
+      <div class="shot-caption" id="shot-caption"></div>
+      <button class="btn ghost" id="shot-close">Close</button>
+    </div>
+  </div>
+
+  <script src="/app.js?v=22"></script>
+</body>
+</html>
