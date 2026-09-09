@@ -5,7 +5,7 @@ A Linux launcher for [Soldat](https://www.soldat.pl/). Paste a `soldat://` link,
 This repository is **only the launcher**. It does not include Soldat, maps, or your config.
 
 **Coder:** [Grok](https://x.ai) (xAI)  
-**Collaborator:** Enzo
+**Collaborator:** [Enzo](https://github.com/enz0afk)
 
 ---
 
@@ -38,6 +38,10 @@ sudo pacman -S python python-gobject gtk3 webkit2gtk-4.1
 ---
 
 ## Run
+
+```bash
+git clone https://github.com/enz0afk/knife-launcher.git
+```
 
 Put this repo **next to** `soldat_x64` (clone it inside your Soldat folder):
 
