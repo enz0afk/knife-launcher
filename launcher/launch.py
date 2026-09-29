@@ -307,13 +307,18 @@ def fetch_gamestat(ip: str, port: int, timeout: float = 2.0) -> dict | None:
             for _ in range(4):
                 if index >= len(lines):
                     break
-                if ": " in lines[index]:
+                if lines[index].startswith("Team") and ": " in lines[index]:
                     scores.append(lines[index].split(": ", 1)[1].strip())
                     index += 1
                 else:
                     break
-            if index < len(lines) and not lines[index].strip():
-                index += 1
+        # Player records start right after the "Players list: (...)" header
+        header = next(
+            (i for i in range(index, len(lines)) if lines[i].startswith("Players list")),
+            None,
+        )
+        if header is not None:
+            index = header + 1
         players = []
         count = int(players_num or 0)
         for _ in range(count):
@@ -1085,6 +1090,15 @@ def main() -> int:
     if not open_window(url):
         import webbrowser
 
+        print(
+            "Opening Knife Launcher in your web browser instead of its own window.\n"
+            "For the app window, install WebKitGTK and PyGObject:\n"
+            "  Debian/Ubuntu/Mint: sudo apt install python3-gi gir1.2-gtk-3.0 gir1.2-webkit2-4.1\n"
+            "  Fedora:             sudo dnf install python3-gobject gtk3 webkit2gtk4.1\n"
+            "  Arch:               sudo pacman -S python-gobject gtk3 webkit2gtk-4.1",
+            file=sys.stderr,
+            flush=True,
+        )
         webbrowser.open(url)
         try:
             thread.join()
