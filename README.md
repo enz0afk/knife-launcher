@@ -41,11 +41,11 @@ sudo pacman -S python python-gobject gtk3 webkit2gtk-4.1
 
 Ready-to-run AppImage (drop it next to `soldat_x64`):
 
-**[Releases](https://github.com/enz0afk/knife-launcher/releases)** — `KnifeLauncher-1.1.AppImage`
+**[Releases](https://github.com/enz0afk/knife-launcher/releases)** — `KnifeLauncher-2.0.AppImage`
 
 ```bash
-chmod +x KnifeLauncher-1.1.AppImage
-./KnifeLauncher-1.1.AppImage
+chmod +x KnifeLauncher-2.0.AppImage
+./KnifeLauncher-2.0.AppImage
 ```
 
 ## Run from source

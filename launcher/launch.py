@@ -1050,7 +1050,7 @@ def open_window(url: str) -> bool:
             if self.win is not None:
                 self.win.present()
                 return
-            self.win = Gtk.ApplicationWindow(application=self, title="Knife Launcher 1.1")
+            self.win = Gtk.ApplicationWindow(application=self, title="Knife Launcher 2.0")
             self.win.set_default_size(1280, 720)
             if ICON_PNG.is_file():
                 try:
