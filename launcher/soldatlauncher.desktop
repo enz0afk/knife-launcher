@@ -1,10 +1,10 @@
 [Desktop Entry]
 Type=Application
-Name=Knife Launcher 1.1
+Name=Knife Launcher 2.0
 Comment=Launcher for Soldat on Linux
 Exec=knifelauncher
 Icon=knifelauncher
 Terminal=false
 Categories=Game;
 StartupWMClass=knifelauncher
-X-AppImage-Version=1.1.0
+X-AppImage-Version=2.0.0
